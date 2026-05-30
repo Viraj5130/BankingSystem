@@ -74,65 +74,55 @@ public class Main
     {
         System.out.println("Enter Account Number");
         int ac_number = sc.nextInt();
-        double sbalance;
-        boolean found=false;
-        for (int i=0;i<accounts.size();i++)
-        {
-            if (ac_number == accounts.get(i).ac_number)
+        BankAccount account = findAccount(accounts,ac_number);
+            if (account != null)
             {
                 System.out.println("Enter Amount to Deposit");
                 double depositAmount = sc.nextDouble();
                 if (depositAmount > 0)
                 {
-                    accounts.get(i).balance += depositAmount;
-                    System.out.println("Account Name:" +accounts.get(i).name);
-                    System.out.println("Account Number:"+accounts.get(i).ac_number);
-                    System.out.println("Balance:"+accounts.get(i).balance);
-
-
+                    account.balance += depositAmount;
+                    System.out.println("Account Name:" +account.name);
+                    System.out.println("Account Number:"+account.ac_number);
+                    System.out.println("Balance:"+account.balance);
                 }
-                else {
+                else
+                {
                     System.out.println("Enter valid Amount");
                 }
-                found = true;
-                break;
             }
-        }
-        if (!found)
-        {
-            System.out.println("Account Does not Exists");
-        }
+            else
+            {
+                System.out.println("Account Does not Exists");
+            }
     }
     public static void withdrawAccount(ArrayList<BankAccount>accounts)
     {
         System.out.println("Enter Account Number");
         int ac_number = sc.nextInt();
-        double balance;
-        boolean found = false;
-        for (int i=0;i<accounts.size();i++)
-        {
-            if (ac_number == accounts.get(i).ac_number)
+        BankAccount account = findAccount(accounts,ac_number);
+            if (account != null)
             {
                 System.out.println("Enter Amount to Withdraw");
                 double withdrawAmount = sc.nextDouble();
-                if (withdrawAmount < accounts.get(i).balance) {
-                    accounts.get(i).balance -= withdrawAmount;
-                    System.out.println("Account Name:" + accounts.get(i).name);
-                    System.out.println("Account Number:" + accounts.get(i).ac_number);
-                    System.out.println("Balance:" + accounts.get(i).balance);
+                if (withdrawAmount < account.balance)
+                {
+                    account.balance -= withdrawAmount;
+                    System.out.println("Account Name:" + account.name);
+                    System.out.println("Account Number:" + account.ac_number);
+                    System.out.println("Balance:" + account.balance);
                 }
-                else {
-                    System.out.println("Inssuficient Funds");
+                else
+                {
+                    System.out.println("Balane is not enough");
                 }
 
             }
-            found = true;
-            break;
-        }
-        if (!found)
-        {
-            System.out.println("Account Does not Exists");
-        }
+
+            else
+            {
+                System.out.println("Account Does not Exists");
+            }
 
     }
     public static void showBalance(ArrayList<BankAccount>accounts)
@@ -140,25 +130,28 @@ public class Main
 
         System.out.println("Enter Account Number:");
         int ac_number = sc.nextInt();
-        double balance;
-        boolean found = false;
-        for (int i=0;i<accounts.size();i++)
+        BankAccount account = findAccount(accounts,ac_number);
+        if (account != null)
         {
-           if (ac_number == accounts.get(i).ac_number)
-           {
-               System.out.println("Account Name:" +accounts.get(i).name);
-               System.out.println("Account Number:"+accounts.get(i).ac_number);
-               System.out.println("Balance:"+accounts.get(i).balance);
-               found = true;
-               break;
-
-           }
+            System.out.println("Account Name:" +account.name);
+            System.out.println("Account Number:"+account.ac_number);
+            System.out.println("Balance:"+account.balance);
         }
-        if (!found)
+
+        else
         {
             System.out.println("Account Does not Exists");
         }
     }
 
+    public static BankAccount findAccount (ArrayList<BankAccount>accounts,int ac_number)
+    {
+        for (int i=0;i<accounts.size();i++) {
+            if (ac_number == accounts.get(i).ac_number) {
+                return accounts.get(i);
+            }
+        }
+        return null;
+    }
 
 }

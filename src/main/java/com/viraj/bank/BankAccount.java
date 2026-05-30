@@ -14,7 +14,8 @@ public class BankAccount
     {
         this.name = name;
         this.balance = balance;
-        ac_number += nxtnumber;
+        ac_number = nxtnumber;
+        nxtnumber++;
         System.out.println("Account Created Successfully");
         System.out.println("Account Number:" +ac_number);
 
